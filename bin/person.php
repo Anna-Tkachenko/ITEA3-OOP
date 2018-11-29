@@ -9,12 +9,17 @@
 require_once  __DIR__ . '/../src/console_helper.php';
 require_once  __DIR__ . '/../src/Person.php';
 
-$john = new Person();
-$john->username = 'john';
-writeln($john->username);
+$john = new Person('john','john@example.com');
+$john->setAge(25);
+writeln($john->getUsername());
 
+$alisa = new Person('alisa','alisa@example.com');
+$alisa->setAge(30);
+writeln($alisa->getUsername());
 
-$alisa = new Person();
-$alisa->username = 'alisa123';
-writeln($alisa->username);
+$mark = new Person('mark','mark1930@example.com');
+$mark->setAge(63);
+writeln($mark->getAge());
+
+writeln('Max age:' . Person::getOldest());
 

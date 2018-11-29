@@ -8,17 +8,54 @@
 
 class Person
 {
-    public $username;
-    public $email;
-    public $age;
+    const MAX_POSSIBLE_AGE = 50;
 
-    public function setUsername($username)
+    private static $maxAge = 0;
+
+    private $username;
+    private $email;
+    private $age;
+
+    public static function getOldest()
     {
-        $this->username = $username;
+        return self::$maxAge;
+    }
+
+    public function __construct($username,$email)
+    {
+        $this->username=$username;
+        $this->email=$email;
     }
 
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    public function setAge($age)
+    {
+        echo "[DEBUG]" . $this->username . \PHP_EOL;
+
+        if ($age > self::MAX_POSSIBLE_AGE) {
+            echo "Cannot create person with provided age" . $age . \PHP_EOL;
+
+            return;
+        }
+
+        $this->age = $age;
+
+        if ($age > self::$maxAge){
+            self::$maxAge = $age;
+        }
     }
 }
