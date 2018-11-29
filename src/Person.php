@@ -44,12 +44,10 @@ class Person
 
     public function setAge($age)
     {
-        echo "[DEBUG]" . $this->username . \PHP_EOL;
-
         if ($age > self::MAX_POSSIBLE_AGE) {
-            echo "Cannot create person with provided age" . $age . \PHP_EOL;
-
-            return;
+          throw new \PersonAgeValidationException(
+              "Cannot create person with provided age " . $age
+          );
         }
 
         $this->age = $age;
