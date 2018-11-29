@@ -30,3 +30,11 @@ writeln($mark->getAge());
 
 writeln('Max age:' . Person::getOldest());
 
+writeln($mark);
+
+writeln($mark->username);
+
+var_dump(isset($mark->username));
+
+unset($mark->username);
+writeln($mark->getUsername());

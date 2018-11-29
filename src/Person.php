@@ -27,6 +27,37 @@ class Person
         $this->email=$email;
     }
 
+    public function __toString()
+    {
+        return \sprintf('%s (%s)', $this->username, $this->email);
+    }
+
+    public function __get($name)
+    {
+        $baseMethodName = \ucfirst($name);
+        $getter = 'get' . $baseMethodName;
+
+        if (\method_exists($this, $getter)) {
+            return $this->$getter();
+        } elseif (\method_exists($this, 'set' . $baseMethodName)) {
+            throw new \LogicException(\sprintf("Property '%s' is write-only!", $name));
+        }
+
+        throw new \LogicException(
+            \sprintf("Property '%s' does not exists in class %s", $name, self::class)
+        );
+    }
+
+    public function __isset($name)
+    {
+        return isset($this->$name);
+    }
+
+    public function __unset($name)
+    {
+        $this->$name = null;
+    }
+
     public function getUsername()
     {
         return $this->username;
@@ -57,3 +88,4 @@ class Person
         }
     }
 }
+
