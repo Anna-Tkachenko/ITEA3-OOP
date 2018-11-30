@@ -7,7 +7,7 @@
  */
 require_once  __DIR__ . '/EmployeeInterface.php';
 
-final class Employee implements EmployeeInterface
+abstract class Employee implements EmployeeInterface
 {
 
     public function work()
